@@ -11,12 +11,12 @@
                 <div class="p-6 text-gray-900">
                     <form method="POST" action="{{ route('categories.store') }}"> 
                         @csrf
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700" for="Name">Name: </label>
-                            <input class="border-2 border-gray-300 rounded-md p-2" type="text" name="name" id="name" required>
+                        <div class="mb-4">
+                            <label class="block text-sm font-bold mb-2 text-gray-700" for="Name">Name: </label>
+                            <input class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500 shadow-sm" type="text" name="name" id="name" required>
                         </div>
-                        <div>
-                            <button class="bg-blue-500 text-white px-4 py-2 rounded-md" type="submit">Update</button>
+                        <div class="flex justify-end">
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-2 rounded-md shadow transition" type="submit">Create</button>
                         </div>
                     </form>
                 </div>

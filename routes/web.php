@@ -5,6 +5,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Middleware\IsAdminMiddleware;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
+use App\Http\Middleware\isCreatorMiddleware;
 
 Route::get('/', function () {
     return view('welcome');
@@ -22,10 +24,14 @@ Route::middleware('auth')->group(function () {
         Route::resource('categories', CategoryController::class);
         Route::resource('posts', PostController::class);
     });
+    Route::middleware(isCreatorMiddleware::class)->group(function () {
+        Route::resource('posts', PostController::class);
+    });
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->middleware(['verified'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['verified'])->name('dashboard');
+    Route::get('/about', function () {
+        return view('AboutMe');
+    })->name('about');
 });
 
 require __DIR__.'/auth.php';

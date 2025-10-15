@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
 {
     /**
@@ -34,7 +35,9 @@ class PostController extends Controller
             'title' => $request->input('title'),
             'content' => $request->input('content'),
             'category_id' => $request->input('category_id'),
+            'user_id' => Auth::user()->id,
         ]);
+
         return redirect()->route('posts.index');
     }
 
@@ -43,7 +46,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('posts.show', compact('post'));
     }
 
     /**
@@ -64,6 +67,7 @@ class PostController extends Controller
             'title' => $request->input('title'),
             'content' => $request->input('content'),
             'category_id' => $request->input('category_id'),
+            'user_id' => Auth::user()->id,
         ]);
         return redirect()->route('posts.index');
     }

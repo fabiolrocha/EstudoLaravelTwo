@@ -21,6 +21,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if(Auth::user()->is_admin && Auth::user()->id === $post->user_id)
                                 @foreach ($posts as $post)
                                 <tr class="odd:bg-white even:bg-gray-50 hover:bg-blue-50 transition">
                                     <td class="py-3 px-4 align-middle">{{ $post->title }}</td>
@@ -40,6 +41,14 @@
                                     </td>
                                 </tr>
                                 @endforeach
+                                @else
+                                @foreach ($posts as $post)
+                                <tr class="odd:bg-white even:bg-gray-50 hover:bg-blue-50 transition">
+                                    <td class="py-3 px-4 align-middle">{{ $post->title }}</td>
+                                    <td class="py-3 px-4 align-middle">{{ $post->category->name }}</td>
+                                </tr>
+                                @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>

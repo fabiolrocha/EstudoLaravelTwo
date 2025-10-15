@@ -22,12 +22,10 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware(IsAdminMiddleware::class)->group(function () {
         Route::resource('categories', CategoryController::class);
-        Route::resource('posts', PostController::class);
     });
-    Route::middleware(isCreatorMiddleware::class)->group(function () {
-        Route::resource('posts', PostController::class);
-    });
-
+    
+    Route::resource('posts', PostController::class);
+    
     Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['verified'])->name('dashboard');
     Route::get('/about', function () {
         return view('AboutMe');

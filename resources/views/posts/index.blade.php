@@ -14,14 +14,21 @@
                     <div class="overflow-x-auto">
                         <table class="w-full min-w-[360px] border border-gray-200 rounded-lg shadow-md">
                             <thead>
+                                @if(Auth::user()->is_admin)
                                 <tr class="bg-gray-100 text-left border-b border-gray-300">
                                     <th class="py-3 px-4 font-semibold">Title</th>
                                     <th class="py-3 px-4 font-semibold">Category</th>
                                     <th class="py-3 px-4 font-semibold text-center">Ações</th>
                                 </tr>
+                                @else
+                                <tr class="bg-gray-100 text-left border-b border-gray-300">
+                                    <th class="py-3 px-4 font-semibold">Title</th>
+                                    <th class="py-3 px-4 font-semibold">Category</th>
+                                </tr>
+                                @endif
                             </thead>
                             <tbody>
-                                @if(Auth::user()->is_admin && Auth::user()->id === $post->user_id)
+                                @if(Auth::user()->is_admin)
                                 @foreach ($posts as $post)
                                 <tr class="odd:bg-white even:bg-gray-50 hover:bg-blue-50 transition">
                                     <td class="py-3 px-4 align-middle">{{ $post->title }}</td>
